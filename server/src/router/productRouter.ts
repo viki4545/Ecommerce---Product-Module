@@ -17,7 +17,7 @@ productRouter.post(
 );
 productRouter.get("/get-all-product", getAllProductsController);
 productRouter.get("/:id", getProductByIdController);
-productRouter.post("/:id", upload.array("images", 5), updateProductController);
-productRouter.delete("/:id", deleteProductController);
+productRouter.put("/:id", upload.array("images", 5), updateProductController);
+productRouter.delete("/delete-product/:id", deleteProductController);
 
 export default productRouter;

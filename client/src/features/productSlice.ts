@@ -29,7 +29,7 @@ const initialState: ProductState = {
   error: null,
 };
 
-const BASE_URL = "http://localhost:5000/products";
+const BASE_URL = "https://ecommerce-product-module.onrender.com/products";
 
 export const fetchProducts = createAsyncThunk<
   {

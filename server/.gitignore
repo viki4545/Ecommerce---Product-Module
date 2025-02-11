@@ -1,7 +1,49 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# TypeScript build artifacts
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+logs/
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor & OS files
 .idea/
 .vscode/
-node_modules/
-build/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Temporary files
 tmp/
 temp/
-.env
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Compiled JavaScript files
+*.js
+*.js.map
+*.d.ts
+*.d.ts.map

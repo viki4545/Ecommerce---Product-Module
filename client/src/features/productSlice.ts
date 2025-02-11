@@ -135,7 +135,6 @@ const productSlice = createSlice({
         state.error = action.payload as string;
       })
 
-      // Add Product Cases
       .addCase(
         addProduct.fulfilled,
         (state, action: PayloadAction<Product>) => {
@@ -143,7 +142,6 @@ const productSlice = createSlice({
         },
       )
 
-      // Edit Product Cases
       .addCase(
         editProduct.fulfilled,
         (state, action: PayloadAction<Product>) => {
@@ -154,7 +152,6 @@ const productSlice = createSlice({
         },
       )
 
-      // Delete Product Cases
       .addCase(
         deleteProduct.fulfilled,
         (state, action: PayloadAction<number>) => {

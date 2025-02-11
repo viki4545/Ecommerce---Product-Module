@@ -128,7 +128,6 @@ const ProductList = () => {
           </table>
         </div>
 
-        {/* Pagination Controls */}
         {totalPages > 1 && (
           <div className="mt-4 flex justify-between gap-2">
             <button
@@ -160,7 +159,6 @@ const ProductList = () => {
         )}
       </div>
 
-      {/* Product Form Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
           <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">

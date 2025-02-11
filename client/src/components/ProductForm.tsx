@@ -21,7 +21,9 @@ interface Props {
 const ProductForm: React.FC<Props> = ({ product, onClose }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [existingImages, setExistingImages] = useState<string[]>(
-    product?.images?.map((img) => `http://localhost:5000${img}`) || [],
+    product?.images?.map(
+      (img) => `https://ecommerce-product-module.onrender.com${img}`,
+    ) || [],
   );
   const [newImages, setNewImages] = useState<File[]>([]);
   const [imageError, setImageError] = useState<string>("");
@@ -47,12 +49,10 @@ const ProductForm: React.FC<Props> = ({ product, onClose }) => {
     formData.append("name", values.name);
     formData.append("price", values.price.toString());
 
-    // ✅ Append new images
     newImages.forEach((file) => {
       formData.append("images", file);
     });
 
-    // ✅ Append existing images
     existingImages.forEach((image) => {
       formData.append(
         "existingImages",
@@ -78,7 +78,6 @@ const ProductForm: React.FC<Props> = ({ product, onClose }) => {
     if (files) {
       const fileArray = Array.from(files);
 
-      // ✅ Check if total images exceed the limit (max 5 images)
       const totalImages =
         existingImages.length + newImages.length + fileArray.length;
       if (totalImages > 5) {
@@ -86,7 +85,7 @@ const ProductForm: React.FC<Props> = ({ product, onClose }) => {
         return;
       }
 
-      setImageError(""); // ✅ Reset error if within limit
+      setImageError("");
       setFieldValue("images", fileArray);
       setNewImages([...newImages, ...fileArray]);
     }
@@ -109,7 +108,6 @@ const ProductForm: React.FC<Props> = ({ product, onClose }) => {
       >
         {({ setFieldValue }) => (
           <Form className="space-y-4">
-            {/* SKU Field */}
             <div>
               <label className="block text-sm font-medium text-[#012647]">
                 SKU
@@ -127,7 +125,6 @@ const ProductForm: React.FC<Props> = ({ product, onClose }) => {
               />
             </div>
 
-            {/* Name Field */}
             <div>
               <label className="block text-sm font-medium text-[#012647]">
                 Name
@@ -145,7 +142,6 @@ const ProductForm: React.FC<Props> = ({ product, onClose }) => {
               />
             </div>
 
-            {/* Price Field */}
             <div>
               <label className="block text-sm font-medium text-[#012647]">
                 Price
@@ -163,7 +159,6 @@ const ProductForm: React.FC<Props> = ({ product, onClose }) => {
               />
             </div>
 
-            {/* Image Upload Field */}
             <div>
               <label className="block text-sm font-medium text-[#012647]">
                 Upload Images
@@ -180,7 +175,6 @@ const ProductForm: React.FC<Props> = ({ product, onClose }) => {
                 <p className="text-sm text-red-500">{imageError}</p>
               )}
 
-              {/* Existing Image Preview with Remove Option */}
               {existingImages.length > 0 && (
                 <div className="mt-2 grid grid-cols-3 gap-2">
                   {existingImages.map((src, index) => (
@@ -202,7 +196,6 @@ const ProductForm: React.FC<Props> = ({ product, onClose }) => {
                 </div>
               )}
 
-              {/* New Image Previews */}
               {newImages.length > 0 && (
                 <div className="mt-2 grid grid-cols-3 gap-2">
                   {newImages.map((file, index) => (
@@ -217,7 +210,6 @@ const ProductForm: React.FC<Props> = ({ product, onClose }) => {
               )}
             </div>
 
-            {/* Submit & Close Buttons */}
             <div className="flex justify-end gap-2">
               <button
                 type="button"

@@ -4,6 +4,7 @@ import { addProduct, editProduct } from "../features/productSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { AppDispatch } from "../app/store";
+import { toast } from "react-hot-toast"; // Import react-hot-toast
 
 interface Product {
   id?: number;
@@ -62,12 +63,24 @@ const ProductForm: React.FC<Props> = ({ product, onClose }) => {
 
     if (product?.id) {
       formData.append("id", product.id.toString());
-      dispatch(editProduct({ id: product.id, formData }));
+      dispatch(editProduct({ id: product.id, formData }))
+        .then(() => {
+          toast.success("Product updated successfully!");
+          onClose();
+        })
+        .catch(() => {
+          toast.error("Failed to update product!");
+        });
     } else {
-      dispatch(addProduct(formData));
+      dispatch(addProduct(formData))
+        .then(() => {
+          toast.success("Product added successfully!");
+          onClose();
+        })
+        .catch(() => {
+          toast.error("Failed to add product!");
+        });
     }
-
-    onClose();
   };
 
   const handleImageChange = (

@@ -11,7 +11,7 @@ The **Home Page** of the application is the main entry point for users. It displ
 
 #### Screenshot of Home Page
 
-![Product List](screenshots/productlist.png)
+![Product List](/screenshots/Productlist.PNG)
 
 ### Features
 
@@ -20,7 +20,7 @@ The **Home Page** of the application is the main entry point for users. It displ
 
 #### Screenshot of Product List
 
-![Add & Edit Product Form](screenshots/addproduct.png)
+![Add & Edit Product Form](/screenshots/addproduct.PNG)
 
 ### Technologies Used
 

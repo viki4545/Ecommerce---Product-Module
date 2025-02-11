@@ -1,10 +1,6 @@
 [build]
-  command = "npm run build"   # Build command for React TypeScript
-  publish = "dist"            # Change to "build" if using Create React App
-
-[build.environment]
-  NODE_VERSION = "18"         # Set your preferred Node.js version
-  NPM_FLAGS = "--legacy-peer-deps"  # Avoid dependency conflicts
+  command = "npm run build"  
+  publish = "dist"            
 
 [[redirects]]
   from = "/*"

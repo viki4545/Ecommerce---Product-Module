@@ -55,7 +55,7 @@ export const fetchProducts = createAsyncThunk<
   },
 );
 
-export const addProduct = createAsyncThunk<Product, Product>(
+export const addProduct = createAsyncThunk<Product, FormData>(
   "product/addProduct",
   async (product, { rejectWithValue }) => {
     try {
@@ -74,7 +74,7 @@ export const editProduct = createAsyncThunk<
   { id: number; formData: FormData }
 >("product/editProduct", async ({ id, formData }, { rejectWithValue }) => {
   try {
-    const { data } = await axios.post(`${BASE_URL}/${id}`, formData, {
+    const { data } = await axios.put(`${BASE_URL}/${id}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -91,7 +91,7 @@ export const deleteProduct = createAsyncThunk<number, number>(
   "product/deleteProduct",
   async (productId, { rejectWithValue }) => {
     try {
-      await axios.delete(`${BASE_URL}/${productId}`);
+      await axios.delete(`${BASE_URL}/delete-product/${productId}`);
       return productId;
     } catch (error: any) {
       return rejectWithValue(
@@ -113,7 +113,15 @@ const productSlice = createSlice({
       })
       .addCase(
         fetchProducts.fulfilled,
-        (state, action: PayloadAction<Product[]>) => {
+        (
+          state,
+          action: PayloadAction<{
+            products: Product[];
+            total: number;
+            currentPage: number;
+            totalPages: number;
+          }>,
+        ) => {
           state.loading = false;
           state.products = action.payload.products;
           state.total = action.payload.total;
@@ -121,6 +129,7 @@ const productSlice = createSlice({
           state.totalPages = action.payload.totalPages;
         },
       )
+
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;

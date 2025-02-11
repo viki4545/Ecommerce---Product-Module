@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../app/store";
+import { AppDispatch, RootState } from "../app/store";
 import { fetchProducts, deleteProduct } from "../features/productSlice";
 import { useState, useEffect } from "react";
 import ProductForm from "./ProductForm";
 
 const ProductList = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { products, totalPages, loading, error } = useSelector(
     (state: RootState) => state.product,
   );
@@ -26,16 +26,14 @@ const ProductList = () => {
     setSelectedProduct(null);
   };
 
-  // ✅ Debounce search input (Delays API call by 500ms)
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearch(searchQuery);
     }, 500);
 
-    return () => clearTimeout(handler); // Cleanup timeout on unmount or new input
+    return () => clearTimeout(handler);
   }, [searchQuery]);
 
-  // ✅ Fetch products when search query or page changes
   useEffect(() => {
     dispatch(
       fetchProducts({ searchQuery: debouncedSearch, page, limit: 10 }) as any,
@@ -48,7 +46,6 @@ const ProductList = () => {
         Product Management
       </h1>
       <div className="w-full max-w-6xl rounded-lg bg-white p-6 shadow-lg">
-        {/* Search Bar */}
         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:justify-between">
           <input
             type="text"
@@ -68,7 +65,6 @@ const ProductList = () => {
           </button>
         </div>
 
-        {/* Product Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full rounded-lg border bg-white shadow-lg">
             <thead>

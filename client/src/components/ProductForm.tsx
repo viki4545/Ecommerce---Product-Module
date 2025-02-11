@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { addProduct, editProduct } from "../features/productSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { AppDispatch } from "../app/store";
 
 interface Product {
   id?: number;
@@ -18,7 +19,7 @@ interface Props {
 }
 
 const ProductForm: React.FC<Props> = ({ product, onClose }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [existingImages, setExistingImages] = useState<string[]>(
     product?.images?.map((img) => `http://localhost:5000${img}`) || [],
   );

@@ -56,7 +56,7 @@ const ProductForm: React.FC<Props> = ({ product, onClose }) => {
     existingImages.forEach((image) => {
       formData.append(
         "existingImages",
-        image.replace("http://localhost:5000", ""),
+        image.replace("https://ecommerce-product-module.onrender.com", ""),
       );
     });
 

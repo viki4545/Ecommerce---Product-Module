@@ -12,7 +12,10 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "https://ecommerce-product-module.netlify.app",
+      "http://localhost:5173",
+    ],
   }),
 );
 app.use(express.json());
